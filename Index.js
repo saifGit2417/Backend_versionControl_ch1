@@ -16,5 +16,5 @@ console.log(sum(10, 20))
 
 import fsModule from 'node:fs'     ///using es6 method for import export
 
-const readFile = fsModule.readFileSync('./Demo.txt')
+const readFile = fsModule.readFileSync('./Demo.txt','utf-8')
 console.log(readFile)
