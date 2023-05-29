@@ -2,12 +2,25 @@
   "name": "Chapter_1",
   "version": "1.0.0",
   "description": "",
-  "main": "Diff.js",
-  "type": "module",
+  "main": "Index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saifGit2417/Chapter_1.git"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saifGit2417/Chapter_1/issues"
+  },
+  "homepage": "https://github.com/saifGit2417/Chapter_1#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
