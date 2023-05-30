@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/saifGit2417/Chapter_1#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "bootstrap": "^5.2.3",
+    "express": "^4.18.2",
+    "font-awesome": "^4.7.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
