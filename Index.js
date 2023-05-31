@@ -1,13 +1,13 @@
-// chapter 3 starting learning express
+// chapter 4 starting learning REST Api and CRUD
 const express = require("express");
 const portNumber = 8001;
 
 const fsModule = require("fs");
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
+const products = jsonFile.products;
 
-
-const morgan=require('morgan')
+const morgan = require("morgan");
 const server = express();
 
 // body parser
@@ -15,64 +15,58 @@ server.use(express.json());
 
 // enable third party logger
 
-server.use(morgan('dev'))
+server.use(morgan("default"));
 
 // to send static file
 server.use(express.static("public"));
 
+// C R U D Api's 
 
-// http://localhost:8001/data.json to access static files
-
-// custom middleware
-
-// const auth = (req, res, next) => {
-//   console.log(req.query);
-//   if (req.query.password=="saif") {
-//     next();
-//   } else {
-//     res.sendStatus(401);
-//   }
-// };
-
-// server.use(auth);
-
-// web API -- end point
-server.get("/", (req, res) => {
-  res.json({
-    type: "GET1"
-  });
-});
-server.get("/", (req, res) => {
-  res.json({
-    type: "GET2"
-  });
-});
-server.post("/", (req, res) => {
-  res.json({
-    type: "POST"
-  });
-});
-server.put("/", (req, res) => {
-  res.json({
-    type: "PUT"
-  });
-});
-server.delete("/", (req, res) => {
-  res.json({
-    type: "DELETE"
-  });
-});
-server.patch("/", (req, res) => {
-  res.json({
-    type: "PATCH"
-  });
+///create POST apir using post method / products
+server.post("/products", (req, res) => {
+  console.log(req.body);
+  products.push(req.body);
+  res.json(req.body);
 });
 
-// server.get("/", (req, res) => {
-//   // res.send("new data send")
-//   // res.sendFile('/Users/91703/New Data/Backend_selflearning/Backend_versionControl_ch1/index.html')  ///to send html file
-//   // res.json(jsonFile)  //to send json file
-//   // res.status(400).send("page not found")  //to sent status and send something with it
-// });
+
+//read api read all docs using get method
+server.get("/products", (req, res) => {
+  res.json(products);
+});
+
+// read data based on product id
+server.get("/products/:id", (req, res) => {
+  const id = +req.params.id;
+  const idOfProduct = products.find(p => p.id === id);
+  res.json(idOfProduct);
+});
+
+// update api by targeting via id - PUT method
+server.put("/products/:id", (req, res) => {
+  const id = +req.params.id;
+  const idOfProduct = products.find(p => p.id === id);
+  products.splice(idOfProduct,1,{...req.body,id:id})
+  res.status(201).json();
+});
+
+
+// update api by targeting via id - PATCH method
+server.patch("/products/:id", (req, res) => {
+  const id = +req.params.id;
+  const idOfProduct = products.find(p => p.id === id);
+  const product=products[idOfProduct]
+  products.splice(idOfProduct,1,{...product,...req.body})
+  res.status(201).json();
+});
+
+// delete api -DELETE type
+server.delete("/products/:id", (req, res) => {
+  const id = +req.params.id;
+  const idOfProduct = products.find(p => p.id === id);
+  const product=products[idOfProduct]
+  products.splice(idOfProduct,1)
+  res.status(201).json(product);
+});
 
 server.listen(portNumber, () => console.log("server started at " + portNumber));
