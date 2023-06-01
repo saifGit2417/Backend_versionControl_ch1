@@ -1,72 +1,34 @@
-// chapter 4 starting learning REST Api and CRUD
-const express = require("express");
-const portNumber = 8001;
+// chapter 5 - concpet of MVC  model view contreller
+// we will be using es6 methods isntaed of using require mehtod
+// tried using es6 method but getting node version error hence needed to go back to commonjs method
 
+// import express from "express";
+const express = require("express");
+// import fsModule from "fs";
 const fsModule = require("fs");
+// import morgan from "morgan";
+const morgan = require("morgan");
+
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
 const products = jsonFile.products;
-
-const morgan = require("morgan");
+const portNumber = 8001;
 const server = express();
+const productRouter = require("./routes/product.js");
+const userRouter = require("./routes/user.js");
 
 // body parser
 server.use(express.json());
 
 // enable third party logger
-
-server.use(morgan("default"));
+// server.use(morgan("default"));
 
 // to send static file
 server.use(express.static("public"));
 
-// C R U D Api's 
+server.use("/products", productRouter.router);
+server.use("/user", userRouter.router);
 
-///create POST apir using post method / products
-server.post("/products", (req, res) => {
-  console.log(req.body);
-  products.push(req.body);
-  res.json(req.body);
+server.listen(portNumber, () => {
+  return true, console.log("server started at " + portNumber);
 });
-
-
-//read api read all docs using get method
-server.get("/products", (req, res) => {
-  res.json(products);
-});
-
-// read data based on product id
-server.get("/products/:id", (req, res) => {
-  const id = +req.params.id;
-  const idOfProduct = products.find(p => p.id === id);
-  res.json(idOfProduct);
-});
-
-// update api by targeting via id - PUT method
-server.put("/products/:id", (req, res) => {
-  const id = +req.params.id;
-  const idOfProduct = products.find(p => p.id === id);
-  products.splice(idOfProduct,1,{...req.body,id:id})
-  res.status(201).json();
-});
-
-
-// update api by targeting via id - PATCH method
-server.patch("/products/:id", (req, res) => {
-  const id = +req.params.id;
-  const idOfProduct = products.find(p => p.id === id);
-  const product=products[idOfProduct]
-  products.splice(idOfProduct,1,{...product,...req.body})
-  res.status(201).json();
-});
-
-// delete api -DELETE type
-server.delete("/products/:id", (req, res) => {
-  const id = +req.params.id;
-  const idOfProduct = products.find(p => p.id === id);
-  const product=products[idOfProduct]
-  products.splice(idOfProduct,1)
-  res.status(201).json(product);
-});
-
-server.listen(portNumber, () => console.log("server started at " + portNumber));
