@@ -4,7 +4,8 @@
   "description": "",
   "main": "Index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon -r esm app/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,9 +20,11 @@
   "homepage": "https://github.com/saifGit2417/Chapter_1#readme",
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "esm": "^3.2.25",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemodule": "^0.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.22"
