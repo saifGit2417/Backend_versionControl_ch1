@@ -20,6 +20,9 @@ const userRouter = require("./routes/user.js");
 // body parser
 server.use(express.json());
 
+// QrfwSIZL4VeZzPbc--admin
+// QrfwSIZL4VeZzPbc--databse
+
 // enable third party logger
 // server.use(morgan("default"));
 
