@@ -12,7 +12,7 @@ const morgan = require("morgan");
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
 const products = jsonFile.products;
-const portNumber = 8001;
+const portNumber = 8002;
 const server = express();
 const productRouter = require("./routes/product.js");
 const userRouter = require("./routes/user.js");
@@ -23,6 +23,7 @@ server.use(express.json());
 // QrfwSIZL4VeZzPbc--admin
 // QrfwSIZL4VeZzPbc--databse
 // db atlas read files
+
 
 // enable third party logger
 // server.use(morgan("default"));
