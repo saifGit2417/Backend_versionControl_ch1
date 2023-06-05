@@ -20,10 +20,14 @@ const userRouter = require("./routes/user.js");
 // body parser
 server.use(express.json());
 
-// QrfwSIZL4VeZzPbc--admin
-// QrfwSIZL4VeZzPbc--databse
-// db atlas read files
+// Sohel#1234--admin
+// l3KoE3lFFY4OtzFk  - datbase
 
+//MdSaifDB ---  QrfwSIZL4VeZzPbc
+
+//MdSaif -------  QrfwSIZL4VeZzPbc
+
+//saifnavneettoptech -------- mhSBIz3EqD0i51Uk
 
 // enable third party logger
 // server.use(morgan("default"));
