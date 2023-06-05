@@ -1,6 +1,4 @@
-// chapter 5 - concpet of MVC  model view contreller
-// we will be using es6 methods isntaed of using require mehtod
-// tried using es6 method but getting node version error hence needed to go back to commonjs method
+// chapter 6 learnt about db compass and db atlas
 
 // import express from "express";
 const express = require("express");
@@ -8,6 +6,7 @@ const express = require("express");
 const fsModule = require("fs");
 // import morgan from "morgan";
 const morgan = require("morgan");
+require('dotenv').config()
 
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
