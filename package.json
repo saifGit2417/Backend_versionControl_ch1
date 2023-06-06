@@ -24,6 +24,7 @@
     "esm": "^3.2.25",
     "express": "^4.18.2",
     "font-awesome": "^4.7.0",
+    "mongoose": "^7.2.2",
     "morgan": "^1.10.0",
     "nodemodule": "^0.3.0"
   },

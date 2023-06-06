@@ -4,9 +4,10 @@ const express = require("express");
 const fsModule = require("fs");
 // import morgan from "morgan";
 const morgan = require("morgan");
-
 // accesing dotenv files
-require('dotenv').config()
+require("dotenv").config();
+// /require mongoose
+
 
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
@@ -15,10 +16,11 @@ const server = express();
 const productRouter = require("./routes/product.js");
 const userRouter = require("./routes/user.js");
 
+
+
 server.use(express.json());
-
+server.use(morgan("default"));
 server.use(express.static("public"));
-
 server.use("/products", productRouter.router);
 server.use("/user", userRouter.router);
 
