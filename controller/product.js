@@ -1,14 +1,25 @@
-const fsModule=require('fs')
-const jsonFile = JSON.parse(fsModule.readFileSync("./data.json", "utf-8"));
-const products = jsonFile.products;
+const fsModule = require("fs");
+// const jsonFile = JSON.parse(fsModule.readFileSync("./data.json", "utf-8"));
+// const products = jsonFile.products;
 
-exports.addNewProduct = (req, res) => {
-  console.log(req.body);
-  products.push(req.body);
+const amazonProductsModel = require("../Models/Product.js");
+const ProductModel = amazonProductsModel.AmazonProduct;
+
+// CRUD operation via mongoose
+
+// create via mongoose
+exports.addNewProduct = async (req, res) => {
+  const product = new ProductModel(req.body);
+  product.title = "nothing phone one 2 without price";
+  product.description = "new phone launched in markte";
+  product.price = 99999;
+  await product.save();
   res.json(req.body);
 };
 
-exports.getAllProduct = (req, res) => {
+exports.getAllProduct = async (req, res) => {
+  const product = new ProductModel();
+  const products = await product.find().exec();
   res.json(products);
 };
 
@@ -40,5 +51,3 @@ exports.deleteProductById = (req, res) => {
   products.splice(idOfProduct, 1);
   res.status(201).json(product);
 };
-
-
