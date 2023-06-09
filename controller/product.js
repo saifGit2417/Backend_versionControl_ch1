@@ -4,6 +4,7 @@ const ejs = require("ejs");
 const path = require("path");
 const amazonProductsModel = require("../Models/Product.js");
 const ProductModel = amazonProductsModel.AmazonProduct;
+
 // view products using ejs
 exports.getAllProductSSR = async (req, res) => {
   const products = await ProductModel.find();
