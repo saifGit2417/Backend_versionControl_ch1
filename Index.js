@@ -8,6 +8,9 @@ const morgan = require("morgan");
 require("dotenv").config();
 // /require mongoose
 
+// enable CORS
+// const cors=require('cors')   ////enable this when using it with react
+
 
 const htmlFile = fsModule.readFileSync("index.html", "utf-8");
 const jsonFile = JSON.parse(fsModule.readFileSync("data.json", "utf-8"));
@@ -17,7 +20,7 @@ const productRouter = require("./routes/product.js");
 const userRouter = require("./routes/user.js");
 
 
-
+// server.use(cors)
 server.use(express.json());
 server.use(morgan("default"));
 server.use(express.static("public"));

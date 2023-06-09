@@ -1,16 +1,29 @@
 const fsModule = require("fs");
 const mongoose = require("mongoose");
-
+const ejs = require("ejs");
+const path = require("path");
 const amazonProductsModel = require("../Models/Product.js");
 const ProductModel = amazonProductsModel.AmazonProduct;
 
+// view products using ejs
+exports.getAllProductSSR = async (req, res) => {
+  const products = await ProductModel.find();
+  ejs.renderFile(
+    path.resolve(__dirname, "../Pages/index.ejs"),
+    { product: products[0] },
+    function(err, str) {
+      res.send(str);
+    }
+  );
+};
+
 // CRUD operation via mongoose
 
-// create via mongoose
+// create/post via mongoose
 exports.addNewProduct = async (req, res) => {
   const product = new ProductModel(req.body);
-  product.title = "oppo reno f2";
-  product.description = "new phone launched in markte";
+  product.title = "motorolla 456gb";
+  product.description = "new phone motorlaa launched in markte";
   product.price = 99999;
   await product.save();
   res.json(req.body);
@@ -18,8 +31,13 @@ exports.addNewProduct = async (req, res) => {
 
 // get all product by using mongoose schema and method
 exports.getAllProduct = async (req, res) => {
-  const products = await ProductModel.find();
-  res.json(products);
+  try {
+    const products = await ProductModel.find();
+    console.log(products);
+    res.json(products);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // get product by id using mongoose and its method

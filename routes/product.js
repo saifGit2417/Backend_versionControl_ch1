@@ -6,10 +6,11 @@ const router = express.Router();
 
 router
   .get("/", productController.getAllProduct)
+  // .get("/ssr", productController.getAllProductSSR)
   .get("/:id", productController.getProductById)
   .post("/", productController.addNewProduct)
   .put("/:id", productController.putproduct)
   .patch("/:id", productController.patchProduct)
   .delete("/:id", productController.deleteProductById);
 
-exports.router=router
+exports.router = router;
